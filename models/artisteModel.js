@@ -50,13 +50,40 @@ const getArtisteByPrenom = (prenom, callback) =>{
     db.query(query, [prenom], callback);
 }
 
+const existeArtiste = (nom, prenom, callback) =>{
+    const query = 'SELECT * FROM artiste WHERE nom =? AND prenom = ?';
+    db.query(query, [nom, prenom], callback=>{
+        if (err) return callback(err, null);
+    if (results.length > 0) {
+      callback(null, true);  
+    } else {
+      callback(null, false);
+    }
+    });
+}
+
+const getArtisteIdParNomPrenom = (nom, prenom, callback) => {
+    const sql = 'SELECT id FROM artiste WHERE nom = ? AND prenom = ?';
+    db.query(sql, [nom, prenom], (err, results) => {
+    if (err) return callback(err);
+    if (results.length > 0) {
+      callback(null, results[0].id);
+    } else {
+      callback(null, null); 
+    }
+  });
+};
+
+
 module.exports={
     getAllArtistes, 
     addArtiste, 
+    existeArtiste,
     getArtisteById,
     deleteArtiste,
     updateArtiste, 
     getArtisteByNom, 
     getArtisteByPrenom, 
-    getArtisteByNationalite
+    getArtisteByNationalite, 
+    getArtisteIdParNomPrenom
 }

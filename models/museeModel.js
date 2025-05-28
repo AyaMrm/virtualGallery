@@ -43,6 +43,19 @@ const getMuseeByPay = (pay, callback)=>{
     db.query(query, [apy], callback);
 }
 
+const getMuseeIdParNom = (nom, callback) => {
+  const sql = 'SELECT id FROM musee WHERE nom = ?';
+  db.query(sql, [nom], (err, results) => {
+    if (err) return callback(err);
+    if (results.length > 0) {
+      callback(null, results[0].id);
+    } else {
+      callback(null, null); // Musée non trouvé
+    }
+  });
+};
+
+
 module.exports={
     getAllMusees, 
     addMusee, 
@@ -51,5 +64,6 @@ module.exports={
     getMuseeByNom,
     getMuseeByPay, 
     getMuseeByVille, 
-    updateMusee
+    updateMusee, 
+    getMuseeIdParNom
 }
