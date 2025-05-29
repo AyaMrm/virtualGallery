@@ -18,7 +18,7 @@ const getMuseeById = (idMusee, callback)=>{
 }
 
 const deleteMusee = (idMusee, callback)=>{
-    const query = 'DELECTE FROM musee WHERE idMusee =?';
+    const query = 'DELETE FROM musee WHERE idMusee =?';
     db.query(query, [idMusee], callback);
 }
 
@@ -40,7 +40,7 @@ const getMuseeByVille = (ville, callback)=>{
 
 const getMuseeByPay = (pay, callback)=>{
     const query = 'SELECT * FROM musee WHERE pay =?';
-    db.query(query, [apy], callback);
+    db.query(query, [pay], callback);
 }
 
 const getMuseeIdParNom = (nom, callback) => {

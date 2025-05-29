@@ -12,7 +12,7 @@ const museeRouter = require('./routes/museeRouter');
 app.use(express.json());
 
 app.use('/api', artisteRouter);
-app.use('./api', museeRouter);
+app.use('/api', museeRouter);
 
 app.get('/', (req, res) =>{
     res.send("Bienvenue dans l'API de la Virtual Gallery !");
