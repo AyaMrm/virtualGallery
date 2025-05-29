@@ -61,3 +61,72 @@ const deleteMusee =(req, res)=>{
     })
 }
 
+const getMuseeByNom =(re, res)=>{
+    const nom = re.params.nom;
+    museeModel.getMuseeByNom(nom, (err, result)=>{
+        if(err){
+            console.error("Erreur lors de la recuperation du musee par nom:", err);
+            return res.status(500).json({error : "Erreur lors de la recuperation du musee par nom"});
+        }
+        res.status(200).json({
+            message:"Musee recuperer par nom avec succes",
+            musee: result
+        })
+    })
+}
+
+const getMuseeByVille =(req, res)=>{
+    const ville = req.params.ville;
+    museeModel.getMuseeByVille(ville, (err, result)=>{
+        if(err){
+            console.error("erreur lorsd e la recuperation des musee par ville:", err);
+            return res.status(500).json({error: "Erreur lors de la recuparation des museee par ville"});
+        }
+        res.status(200).json({
+            message:"Musees recuperer par ville avec succes", 
+            musee : result
+        })
+    })
+}
+
+
+const getMuseeByPay =(req, res)=>{
+    const pay = req.params.pay;
+    museeModel.getMuseeByPay(pay, (err, result)=>{
+        if(err){
+            console.error("erreur lorsd e la recuperation des musee par pays:", err);
+            return res.status(500).json({error: "Erreur lors de la recuparation des museee par pays"});
+        }
+        res.status(200).json({
+            message:"Musees recuperer par pays avec succes", 
+            musee : result
+        })
+    })
+}
+
+
+const getMuseeIdParNom =(req, res)=>{
+    const nom = req.params.nom;
+    museeModel.getMuseeIdParNom(nom, (err, result)=>{
+        if(err){
+            console.error("erreur lorsd e la recuperation d'ID musee par nom:", err);
+            return res.status(500).json({error: "Erreur lors de la recuparation d'ID museee par nom"});
+        }
+        res.status(200).json({
+            message:"ID Musees recuperer avec succes", 
+            musee : result
+        })
+    })
+}
+
+module.exports ={
+    addMusee, 
+    getAllMusees, 
+    getMuseeById, 
+    updateMusee, 
+    deleteMusee, 
+    getMuseeByNom, 
+    getMuseeByVille, 
+    getMuseeByPay, 
+    getMuseeIdParNom
+}
