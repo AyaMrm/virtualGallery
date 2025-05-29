@@ -18,7 +18,7 @@ router.put('/artistes/:idArtiste', artisteController.updateArtiste);
 router.delete('/artistes/:idArtiste', artisteController.deleteArtiste);
 
 //get by nationalite
-router.get('artistes/nationalite/:nationalite', artisteController.getArtisteByNationalite);
+router.get('/artistes/nationalite/:nationalite', artisteController.getArtisteByNationalite);
 
 //get by nom
 router.get('/artistes/nom/:nom', artisteController.getArtisteByNom);
@@ -27,6 +27,6 @@ router.get('/artistes/nom/:nom', artisteController.getArtisteByNom);
 router.get('/artistes/prenom/:prenom', artisteController.getArtisteByPrenom);
 
 //get by nom prenom
-router.get('/artistes/nomPrenom', artisteController.getArtisteIdParNomPrenom);
+router.post('/artistes/nomPrenom', artisteController.getArtisteIdParNomPrenom);
 
 module.exports = router;

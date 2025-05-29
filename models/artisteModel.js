@@ -63,16 +63,19 @@ const existeArtiste = (nom, prenom, callback) =>{
 }
 
 const getArtisteIdParNomPrenom = (nom, prenom, callback) => {
-    const sql = 'SELECT id FROM artiste WHERE nom = ? AND prenom = ?';
-    db.query(sql, [nom, prenom], (err, results) => {
+  const sql = 'SELECT idArtiste FROM artiste WHERE nom = ? AND prenom = ?';  // id au lieu de idArtiste
+  console.log("Exécution SQL avec:", nom, prenom);
+  db.query(sql, [nom, prenom], (err, results) => {
+    console.log("Résultat SQL:", results);
     if (err) return callback(err);
     if (results.length > 0) {
-      callback(null, results[0].id);
+      callback(null, results[0].idArtiste);  // Accès à la bonne propriété
     } else {
-      callback(null, null); 
+      callback(null, null);
     }
   });
 };
+
 
 
 module.exports={

@@ -32,3 +32,32 @@ const getMuseeById = (req, res)=>{
     })
 }
 
+const updateMusee = (req, res)=>{
+    const idMusee = req.params.idMusee;
+    const musee = req.body;
+    museeModel.updateMusee(idMusee, musee, (err, result)=>{
+        if(err){
+            console.errorr("Erreur lors de la mise a jour du musee:", err);
+            return res.status(500).json({error: "Erreur lors de la maj du musee"});
+        }
+        res.status(200).json({
+            message: "Musee maj avec succes", 
+            musee: result
+        })
+    })
+}
+
+const deleteMusee =(req, res)=>{
+    const idMusee = req.params.idMusee;
+    museeModel.deleteMusee(idMusee, (err, result)=>{
+        if(err){
+            console.error("Erreur lors de la suppression du musee:", err);
+            return res.status(500).json({error:"Erreur lors de la suppression du musee"});
+        }
+        res.status(200).json({
+            message:"Musee supprimer avec succes", 
+            musee: result
+        })
+    })
+}
+

@@ -56,7 +56,7 @@ const deleteArtiste = (req, res)=>{
     })
 }
 
-const getArtisteByNationalite = (Req, res)=>{
+const getArtisteByNationalite = (req, res)=>{
     const nationalite = req.params.nationalite;
     artisteModel.getArtisteByNationalite(nationalite, (err, result)=>{
         if(err){
@@ -67,9 +67,9 @@ const getArtisteByNationalite = (Req, res)=>{
     })
 }
 
-const getArtisteByNom = (Req, res)=>{
+const getArtisteByNom = (req, res)=>{
     const nom = req.params.nom;
-    artisteModel.getArtisteByNationalite(nom, (err, result)=>{
+    artisteModel.getArtisteByNom(nom, (err, result)=>{
         if(err){
             console.error("Erreur lors de la recuperation des artistes par nom:", err);
             return res.status(500).json({error:"Erreur lors de la recuperation des artistes par nom"});
@@ -78,9 +78,9 @@ const getArtisteByNom = (Req, res)=>{
     })
 }
 
-const getArtisteByPrenom = (Req, res)=>{
+const getArtisteByPrenom = (req, res)=>{
     const prenom = req.params.prenom;
-    artisteModel.getArtisteByNationalite(prenom, (err, result)=>{
+    artisteModel.getArtisteByPrenom(prenom, (err, result)=>{
         if(err){
             console.error("Erreur lors de la recuperation des artistes par prenom:", err);
             return res.status(500).json({error:"Erreur lors de la recuperation des artistes par prenom"});
@@ -100,16 +100,26 @@ const existeArtiste =(req, res)=>{
     })
 }
 
-const getArtisteIdParNomPrenom =(req, res)=>{
-    const {nom, prenom}= req.body;
-    artisteModel.getArtisteIdParNomPrenom(nom, prenom, (err, idArtiste)=>{
-        if(err){
-            console.error("Erreur lors de la recuperation de l'ID de l'artiste:", err);
-            return res.status(500).json({error:"Erreur lors de la recuperation de l'ID de l'artiste"});
-        }
-        res.status(200).json({message:"ID de l'artiste recuperer avec succes", idArtiste: idArtiste});
-    })
-}
+const getArtisteIdParNomPrenom = (req, res) => {
+  console.log("req.body:", req.body);  // <-- Ajoute ce log
+
+  const { nom, prenom } = req.body;
+  console.log("nom:", nom, "prenom:", prenom);  // <-- Et celui-ci aussi
+
+  artisteModel.getArtisteIdParNomPrenom(nom, prenom, (err, idArtiste) => {
+    if (err) {
+      console.error("Erreur lors de la recuperation de l'ID de l'artiste:", err);
+      return res.status(500).json({ error: "Erreur lors de la recuperation de l'ID de l'artiste" });
+    }
+
+    console.log("ID récupéré :", idArtiste);
+    res.status(200).json({
+      message: "ID de l'artiste récupéré avec succès",
+      idArtiste: idArtiste
+    });
+  });
+};
+
 
 module.exports={
     getAllArtistes,
