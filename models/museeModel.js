@@ -44,11 +44,11 @@ const getMuseeByPay = (pay, callback)=>{
 }
 
 const getMuseeIdParNom = (nom, callback) => {
-  const sql = 'SELECT id FROM musee WHERE nom = ?';
+  const sql = 'SELECT idMusee FROM musee WHERE nom = ?';
   db.query(sql, [nom], (err, results) => {
     if (err) return callback(err);
     if (results.length > 0) {
-      callback(null, results[0].id);
+      callback(null, results[0].idMusee);
     } else {
       callback(null, null); // Musée non trouvé
     }

@@ -96,7 +96,7 @@ const deleteMusee =(req, res)=>{
     })
 }
 
-const getToileByTitre =(Req, res)=>{
+const getToileByTitre =(req, res)=>{
     const titre = req.params.titre;
     toileModel.getToileByTitre(titre, (err, result)=>{
         if(err){
@@ -148,7 +148,7 @@ const getToileByIdMusee =(req, res)=>{
                 console.error("erreur lors de la recuperation des toiles par musee:", errr);
                 return res.status(500).json({error:"Erreur lors de la recuperation des toiles par musee"});
             }
-            res.status(200).jsnon({
+            res.status(200).json({
                 message:"Toiles recuperer par musee avec succes",
                 result: result
             })

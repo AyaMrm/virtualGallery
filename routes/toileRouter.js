@@ -7,7 +7,7 @@ router.post('/toiles', toileController.addToile);
 
 router.get('/toiles', toileController.getAllToile);
 
-router.get('/toiles,"idToile', toileController.getToileById);
+router.get('/toiles/:idToile', toileController.getToileById);
 
 router.put('/toiles/:idToile', toileController.updateToile);
 
