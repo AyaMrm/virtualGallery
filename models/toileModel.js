@@ -9,7 +9,7 @@ const getAllToile = (callback)=>{
 
 const addToile = (toile, callback)=>{
     const query = 'INSERT INTO toile (titre, dateCreation, technique, support, style, idArtiste, idMusee) VALUES (?,?, ?, ?, ?, ?, ?)';
-    const values = [toile.titre, toile.dateCreation, toile.techinique, toile.support, toile.style, toile.idArtiste, toile.idMusee];
+    const values = [toile.titre, toile.dateCreation, toile.technique, toile.support, toile.style, toile.idArtiste, toile.idMusee];
     db.query(query, values, callback);
 }
 
