@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const toileController = require('../controllers/toileController');
+const {body, param, validationResult} = require('express-validator');
 
 
 router.post('/toiles', [
