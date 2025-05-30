@@ -4,15 +4,15 @@ const museeController = require('../controllers/museeController');
 const {body, param, validationResult} = require('express-validator');
 
 router.post('/musees',[
-    body('nom').notEmpty().withMessage('Le nom du musee est requis'),
-    body('adresse').notEmpty().withMessage('L\'adresse du musee est requise'),
-    body('ville').notEmpty().withMessage('La ville du musee est requise'),
-    body('pay').notEmpty().withMessage('Le pays du musee est requis'),
-    body('typeMusee').notEmpty().withMessage('Le type du musee est requis'),
-    body('nom').isString().withMessage('Le nom doit etre une chaine de caracteres'),
-    body('adresse').isString().withMessage('L\'adresse doit etre une chaine de caracteres'),
-    body('ville').isString().withMessage('La ville doit etre une chaine de caracteres'),
-    body('pay').isString().withMessage('Le pays doit etre une chaine de caracteres'),
+    body('nom').trim().escape().notEmpty().withMessage('Le nom du musee est requis'),
+    body('adresse').trim().escape().notEmpty().withMessage('L\'adresse du musee est requise'),
+    body('ville').trim().escape().notEmpty().withMessage('La ville du musee est requise'),
+    body('pay').trim().escape().notEmpty().withMessage('Le pays du musee est requis'),
+    body('typeMusee').trim().escape().notEmpty().withMessage('Le type du musee est requis'),
+    body('nom').trim().escape().isString().withMessage('Le nom doit etre une chaine de caracteres'),
+    body('adresse').trim().escape().isString().withMessage('L\'adresse doit etre une chaine de caracteres'),
+    body('ville').trim().escape().isString().withMessage('La ville doit etre une chaine de caracteres'),
+    body('pay').trim().escape().isString().withMessage('Le pays doit etre une chaine de caracteres'),
 ],(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -23,17 +23,17 @@ router.post('/musees',[
 router.get('/musees', museeController.getAllMusees);
 
 router.put('/musees/:idMusee',[
-    param('idMusee').isInt().withMessage('L\'ID doit etre un entier'),
-    param('idMusee').isEmpty().withMessage('L\'ID nedoit pas etre vide'),
-    body('nom').notEmpty().withMessage('Le nom du musee est requis'),
-    body('adresse').notEmpty().withMessage('L\'adresse du musee est requise'),
-    body('ville').notEmpty().withMessage('La ville du musee est requise'),
-    body('pay').notEmpty().withMessage('Le pays du musee est requis'),
-    body('typeMusee').notEmpty().withMessage('Le type du musee est requis'),
-    body('nom').isString().withMessage('Le nom doit etre une chaine de caracteres'),
-    body('adresse').isString().withMessage('L\'adresse doit etre une chaine de caracteres'),
-    body('ville').isString().withMessage('La ville doit etre une chaine de caracteres'),
-    body('pay').isString().withMessage('Le pays doit etre une chaine de caracteres'),
+    param('idMusee').trim().escape().isInt().withMessage('L\'ID doit etre un entier'),
+    param('idMusee').trim().escape().isEmpty().withMessage('L\'ID nedoit pas etre vide'),
+    body('nom').trim().escape().notEmpty().withMessage('Le nom du musee est requis'),
+    body('adresse').trim().escape().notEmpty().withMessage('L\'adresse du musee est requise'),
+    body('ville').trim().escape().notEmpty().withMessage('La ville du musee est requise'),
+    body('pay').trim().escape().notEmpty().withMessage('Le pays du musee est requis'),
+    body('typeMusee').trim().escape().notEmpty().withMessage('Le type du musee est requis'),
+    body('nom').trim().escape().isString().withMessage('Le nom doit etre une chaine de caracteres'),
+    body('adresse').trim().escape().isString().withMessage('L\'adresse doit etre une chaine de caracteres'),
+    body('ville').trim().escape().isString().withMessage('La ville doit etre une chaine de caracteres'),
+    body('pay').trim().escape().isString().withMessage('Le pays doit etre une chaine de caracteres'),
 ],(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -42,8 +42,8 @@ router.put('/musees/:idMusee',[
 });
 
 router.delete('/musees/:idMusee',[
-    param('idMusee').isInt().withMessage('L\'ID doit etre un entier'),
-    param('idMusee').isEmpty().withMessage('L\'ID nedoit pas etre vide'),
+    param('idMusee').trim().escape().isInt().withMessage('L\'ID doit etre un entier'),
+    param('idMusee').trim().escape().isEmpty().withMessage('L\'ID nedoit pas etre vide'),
 ], (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -52,8 +52,8 @@ router.delete('/musees/:idMusee',[
 });
 
 router.get('/musees/:idMusee',[
-    param('idMusee').isInt().withMessage('L\'ID doit etre un entier'),
-    param('idMusee').isEmpty().withMessage('L\'ID nedoit pas etre vide'),
+    param('idMusee').trim().escape().isInt().withMessage('L\'ID doit etre un entier'),
+    param('idMusee').trim().escape().isEmpty().withMessage('L\'ID nedoit pas etre vide'),
 ], (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -62,8 +62,8 @@ router.get('/musees/:idMusee',[
 });
 
 router.get('/musees/nom/:nom', [
-    param('nom').isString().withMessage('le nom doit etre une chaine de caracteres'),
-    param('nom').isEmpty().withMessage('Le nom ne doit pas etre vide'),
+    param('nom').trim().escape().isString().withMessage('le nom doit etre une chaine de caracteres'),
+    param('nom').trim().escape().isEmpty().withMessage('Le nom ne doit pas etre vide'),
 ],(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -72,8 +72,8 @@ router.get('/musees/nom/:nom', [
 });
 
 router.get('/musees/ville/:ville',[
-    param('ville').isString().withMessage('la ville doit etre une chaine de caracteres'),
-    param('ville').isEmpty().withMessage('La ville ne doit pas etre vide'),
+    param('ville').trim().escape().isString().withMessage('la ville doit etre une chaine de caracteres'),
+    param('ville').trim().escape().isEmpty().withMessage('La ville ne doit pas etre vide'),
 ], (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -82,8 +82,8 @@ router.get('/musees/ville/:ville',[
 });
 
 router.get('/musees/pays/:pay',[
-    param('pay').isString().withMessage('le pay doit etre une chaine de caracteres'),
-    param('pay').isEmpty().withMessage('Le pay ne doit pas etre vide'),
+    param('pay').trim().escape().isString().withMessage('le pay doit etre une chaine de caracteres'),
+    param('pay').trim().escape().isEmpty().withMessage('Le pay ne doit pas etre vide'),
 ],(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

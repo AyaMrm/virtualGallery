@@ -5,20 +5,20 @@ const {body, param, validationResult} = require('express-validator');
 
 
 router.post('/toiles', [
-    body('titre').notEmpty().withMessage('Le titre est requis'),
-    body('dateCreation').notEmpty().withMessage('La date de creation est requise'),
-    body('technique').notEmpty().withMessage('La technique est requis'),
-    body('support').notEmpty().withMessage('Le support est requis'),
-    body('style').notEmpty().withMessage('Le style est requis'),
-    body('idArtiste').notEmpty().withMessage('Le id Artiste est requis'),
-    body('idMusee').notEmpty().withMessage('Le id Musee du musee est requis'),
-    body('titre').isString().withMessage('Le titre doit etre une chaine de caracteres'),
-    body('dateCreation').isDate().withMessage('la date de creation doit etre une date valide'),
-    body('technique').isString().withMessage('La technique doit etre une chaine de caracteres'),
-    body('support').isString().withMessage('Le support doit etre une chaine de caracteres'),
-    body('style').isString().withMessage('Le style doit etre une chaine de caracteres'),
-    body('idArtiste').isInt().withMessage('Le id Artiste doit etre un entier'),
-    body('idMusee').isInt().withMessage('Le id musee doit etre un entier'),
+    body('titre').trim().escape().notEmpty().withMessage('Le titre est requis'),
+    body('dateCreation').trim().escape().notEmpty().withMessage('La date de creation est requise'),
+    body('technique').trim().escape().notEmpty().withMessage('La technique est requis'),
+    body('support').trim().escape().notEmpty().withMessage('Le support est requis'),
+    body('style').trim().escape().notEmpty().withMessage('Le style est requis'),
+    body('idArtiste').trim().escape().notEmpty().withMessage('Le id Artiste est requis'),
+    body('idMusee').trim().escape().notEmpty().withMessage('Le id Musee du musee est requis'),
+    body('titre').trim().escape().isString().withMessage('Le titre doit etre une chaine de caracteres'),
+    body('dateCreation').trim().escape().isDate().withMessage('la date de creation doit etre une date valide'),
+    body('technique').trim().escape().isString().withMessage('La technique doit etre une chaine de caracteres'),
+    body('support').trim().escape().isString().withMessage('Le support doit etre une chaine de caracteres'),
+    body('style').trim().escape().isString().withMessage('Le style doit etre une chaine de caracteres'),
+    body('idArtiste').trim().escape().isInt().withMessage('Le id Artiste doit etre un entier'),
+    body('idMusee').trim().escape().isInt().withMessage('Le id musee doit etre un entier'),
 ],(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -29,8 +29,8 @@ router.post('/toiles', [
 router.get('/toiles', toileController.getAllToile);
 
 router.get('/toiles/:idToile', [
-    body('idToile').notEmpty().withMessage('Le id de la toile est requis'),
-    body('idToile').isInt().withMessage('Le id de la toile doit etre un entier'),
+    body('idToile').trim().escape().notEmpty().withMessage('Le id de la toile est requis'),
+    body('idToile').trim().escape().isInt().withMessage('Le id de la toile doit etre un entier'),
 ],(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -39,8 +39,8 @@ router.get('/toiles/:idToile', [
 });
 
 router.put('/toiles/:idToile', [
-    body('idToile').notEmpty().withMessage('Le id de la toile est requis'),
-    body('idToile').isInt().withMessage('Le id de la toile doit etre un entier'),
+    body('idToile').trim().escape().notEmpty().withMessage('Le id de la toile est requis'),
+    body('idToile').trim().escape().isInt().withMessage('Le id de la toile doit etre un entier'),
 ],(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -49,8 +49,8 @@ router.put('/toiles/:idToile', [
 });
 
 router.delete('/toiles/:idToile', [
-    body('idToile').notEmpty().withMessage('Le id de la toile est requis'),
-    body('idToile').isInt().withMessage('Le id de la toile doit etre un entier'),
+    body('idToile').trim().escape().notEmpty().withMessage('Le id de la toile est requis'),
+    body('idToile').trim().escape().isInt().withMessage('Le id de la toile doit etre un entier'),
 ] ,(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -59,8 +59,8 @@ router.delete('/toiles/:idToile', [
 });
 
 router.get('/toiles/titre/:titre', [
-    body('titre').notEmpty().withMessage('Le titre est requis'),
-    body('titre').isString().withMessage('Le titre doit etre une chaine de caracteres'),
+    body('titre').trim().escape().notEmpty().withMessage('Le titre est requis'),
+    body('titre').trim().escape().isString().withMessage('Le titre doit etre une chaine de caracteres'),
 ], (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -69,10 +69,10 @@ router.get('/toiles/titre/:titre', [
 });
 
 router.get('/toiles/artiste/:nomArtiste/:prenomArtiste',[
-    body('nomArtiste').notEmpty().withMessage('Le nom d\'artiste est requis'),
-    body('nomArtiste').isString().withMessage('Le nom d\'artiste  doit etre une chaine de caracteres'),
-    body('prenomArtiste').notEmpty().withMessage('Le prenom d\'artiste est requis'),
-    body('prenomArtiste').isString().withMessage('Le prenom d\'artiste  doit etre une chaine de caracteres'),
+    body('nomArtiste').trim().escape().notEmpty().withMessage('Le nom d\'artiste est requis'),
+    body('nomArtiste').trim().escape().isString().withMessage('Le nom d\'artiste  doit etre une chaine de caracteres'),
+    body('prenomArtiste').trim().escape().notEmpty().withMessage('Le prenom d\'artiste est requis'),
+    body('prenomArtiste').trim().escape().isString().withMessage('Le prenom d\'artiste  doit etre une chaine de caracteres'),
 ],(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -81,8 +81,8 @@ router.get('/toiles/artiste/:nomArtiste/:prenomArtiste',[
 });
 
 router.get('/toiles/musee/:nomMusee',[
-    body('nomMusee').notEmpty().withMessage('Le nom de musee  est requis'),
-    body('nomMusee').isString().withMessage('Le nom de musee  doit etre une chaine de caracteres'),
+    body('nomMusee').trim().escape().notEmpty().withMessage('Le nom de musee  est requis'),
+    body('nomMusee').trim().escape().isString().withMessage('Le nom de musee  doit etre une chaine de caracteres'),
 ],(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
